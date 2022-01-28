@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="de">
+<head>
+<title>Zebrango</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<script type="text/javascript" src="../contracts/Zebrango.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://unpkg.com/moralis@0.0.184/dist/moralis.js"></script>
+<link href="css/default.css" rel="stylesheet">
+
+
+</head>
+<body>
+    <!-- navigation -->
+<nav id="topnav" class="clearfix">
+
+    
+        <img src="images/Zebrango_logo_03_KopfRundHG_green_200px.svg" alt="Logo">
+        <ul class="mainnav1">
+            <li><a href="pdf/White.pdf" target="_blank">Whitepaper</a></li>
+        </ul>
+
+        <ul class="mainnav2">
+            
+            <li><a href="#Aboutus">About Us</a></li>
+            <li><a href="#Events">Events</a></li>
+            <li><a href="#Games">Games</a></li>
+            <li><a href="#SubmitProject">Submit Project</a></li>
+            
+        </ul>
+
+
+        <ul class="buttonnav">
+            <li><button type="button" id="login_button" class="font_darkGreen">Authenticate</a></li>
+            <li><button type="button" id="logout_button" class="button_small font_darkGreen">logout</a></li>
+        </ul>
+
+        
+     </nav>
+
+     <!-- <p>Zebrango will continue growing by the community and for the community.<br> -->
+
+<!-- About Us -->   
+
+<header id="Aboutus" class="bgcover bg_header font_weiss min100vh pad8">
+    <div>
+        <h2>Zebrango</h2>
+        <h3>what is Zebrango?</h3>
+
+
+        <p> 
+            <b class="font_softorange">1.</b> 
+            <br>
+            collection of <span class="font_softorange">decentralized casino games</span>, where people can <br>
+            <span class="font_softorange">play while earning money in a fast, fair and anonymous way</span>.
+            <br><br>
+            <b class="font_softorange">2.</b>  
+            <br>
+            it's a <span class="font_softorange">space for developers and creative people</span> to show their extraordinary talent.<br>
+            The <span class="font_softorange">shared games</span> will be <span class="font_softorange">added to the Zebrango ecosystem</span> after a fair voting.
+        </p> <br>
+
+
+
+
+        <h3>Play</h3>
+        <p>
+            <span class="font_softorange">Earing money</span> with Zebrango games is <span class="font_softorange">fun and safe</span>, <br>
+            our games are completley <span class="font_softorange">decentralized and onchain</span>.
+        </p><br>
+
+
+        <h3>You have an idea?</h3>
+        <p>
+            <b class="font_softorange">Show it to the world! </b> <br>
+            <span>Not only you will have a chance to win the Prize,<br>
+            You might be also able to play it with your friends.</span>
+        </p><br>
+     
+        <h3>Vote</h3>
+        <p>
+            <span><b class="font_softorange">Vote for the game</b> you want to play in the future.</span>
+        </p><br>
+
+
+
+
+
+
+
+
+
+
+
+          
+            <img src="images/mango_02_600px.svg" alt="Logo">
+
+<!-- Events -->
+
+            <p><a href="#Events" class="slide button font_darkGreen">next</a></p>
+    </div>
+</header>
+<main>
+
+
+
+        <div class="modal" id="modal">
+            
+            <div class="modal-header">
+                <div class="title">Event</div>
+                <button class="close-button" id="close-button">&times;</button>
+            </div>
+
+            <div class="modal-body">
+               <table id="prop-table">
+                  
+                        <tr>
+                            <th class="headlineThPn">projectname</th>
+                            <th class="headlineThM">maker</th>
+                            <th class="headlineThV">votes</th>
+                        </tr>
+                    
+               </table>
+            </div>
+
+        </div>
+
+
+        <div class="overlay" id="overlay"></div>
+
+        <article id="Events" class="wrap900 pad3">
+
+
+       <div class="mittigAusrichten">
+            <div class="zweispalter pad2">
+                <div class="font_hell"> 
+                    <h2 class="font_darkGreen left" >Current Event</h2>
+                    <p>Add your project to our current Event, gain votes and win a prize!</p>
+                    <p>After auditing the smart contract your project might become part of our game collection.</p>
+                    <strong class="font_orange">Click on the event to see the submitted projects.</strong>
+                </div>
+                <div class="bgcover bg_events font_weiss max400px min200px rel pointer">
+                    <p class="strong center_center pad2">
+                    Current Event Number<br>
+                        <span id="eventnumber" class="font_orange">XXX</span><br><br>
+                    In the Pot:<br>
+                    <span id="prize" class="font_orange">XXX</span><br><br>
+                    Projects submitted:<br>
+                    <span id="numberOfProjects" class="font_orange">XXX</span><br><br>
+                    End date:<br>
+                    <span id="endTime" class="font_orange">XXX</span></p>
+                </div>
+
+            </div>
+        </div>
+
+    </article>
+
+    <!-- past Events -->
+
+
+    <article id="PastEvents" class="center pad3 bg_events">
+        <div class="font_hell wrap800"> 
+            
+    
+            <h2 class="font_white center" >past events</h2>
+    
+                
+                <div id="divtablePastEvent" class="wrap900">
+                    
+                    <div id="divtablePastEventInput">
+                        <input class="pastEventInput" id="pastEventInput" onchange="pastEventInputChange(this)" type="text" name="eventRound" placeholder="insert the event ID">
+                        <input class="pastEventInput" id="pastEventBtn" type="submit" value="S E A R C H ">
+                     </div>
+                    <table id="tablePastEvent">
+                     
+    
+                   
+                         
+                          
+                            <div class="pad8"></div>
+                            
+                        </tbody>
+                    </table>
+                    <div class="pad8"></div>
+                </div>
+            
+        </div>
+        <div class="pad8"></div>
+       
+    </article>
+
+  <p class="center"><a href="#Games" class="slide button font_darkGreen">next</a></p>
+   
+
+    <!-- Games -->
+
+  
+    
+    
+    <article id="Games" class="pad8 ">
+        <h2 class="font_darkGreen">Games</h2>
+
+        <div class="center wrap800 "> 
+            <strong class="font_darkGreen">Play Zebrango games, earn money in a fun, simple and decentralized manner</strong><br>
+            <p class="font_darkGreen">By playing Zebrango games you are supporting the Zebrango community.. </p>
+
+            <div>
+
+                <div class="bgcover bg_games font_weiss pad8 martop45bot100">
+
+                    <a href="./games.html" target="_blank">
+                    <h3 class="font_weiss shadow">avax Price Prediction</h3></a>
+                    <p class=" shadow">Predict how the price of Avax is going to preform</p>
+                </div>
+            </div>
+            <p class="font_darkGreen">.. and by supporting the Zebrango community, more games will be added to the platform.</p>
+
+            <!---
+            <div>
+                <div class="bgcover bg_games font_weiss pad8">
+                    <h3 class="font_weiss">Game 2</h3>
+                    <p>This is the description for the game</p>
+                </div>
+            </div>
+            <div>
+                <div class="bgcover bg_games font_weiss pad8">
+                    <h3 class="font_weiss">Game 3</h3>
+                    <p>This is the description for the game</p>
+                </div>
+            </div>
+        </div>
+    -->
+
+
+ <!-- submit Project -->
+        <p class="center pad8"><a href="#SubmitProject" class="slide button font_darkGreen">next</a></p>
+   </article>
+    <article id="SubmitProject" class="bg_submit">
+        <h2 class="font_white">Submit your Project</h2>
+        <div class="pad3 wrap500 font_darkGreen">
+            
+            <form action="" method="get" id="project-form">
+                <input type="text" name="projectname" placeholder="projectname">
+                <input type="text" name="username" placeholder="username">
+                <input type="text" name="githublink" placeholder="githublink">
+                <textarea rows="5" name="description" placeholder="description"></textarea>
+                <input type="submit" value="S U B M I T ">
+            </form>
+        </div>
+    </article>
+</article>
+
+<!-- Community-->
+<article id="" class="wrap900 pad3 zweispalter">
+   
+  
+        <div class="pad2 bordergreen">
+            <div class="font_mittel"> 
+                <h2 class="font_darkGreen left" >Play games</h2>
+                <p>By playing on Zebrango, you support the development of new games.</p>
+                <p>More money in the pot for current event means more serious and fun games in the space.</p>
+
+            </div>
+
+           
+                
+                
+            </div>
+            <div class="pad2 bordergreen"> 
+                <div class="font_mittel"> 
+                <h2 class="font_darkGreen left" >Build/Vote</h2>
+                <p>By participating in the monthly events, you are helping to expand the ecosystem.</p>
+                <p>More serious games lead to more users on the platform. Therefore more gains!</p>
+    
+            </div>
+        </div>
+
+       
+   
+
+
+
+
+</article>
+<div class="pad3"></div>
+
+
+
+
+</main>
+
+
+
+<!-- Footer -->
+<footer id="end" class="center pad3">
+    
+
+        <div class="center pad3"> 
+    <h3 class="font_darkGreen">Find us here</h3>
+    <p class="font_darkGreen"> You have questions?<br>
+        Wanna connect? <br>
+        Become part of the awesome Zebrango community?<br><br>
+        <b>Come join us on Discord</b>
+    </p>
+    <div><img class="max50px" src="images/Discord-Logo-Black.svg" alt="" /></div>
+</div>
+
+<div class="center pad8">
+    <div><img class="max50px" src="images/mango_03_400px.svg" alt="" /></div>
+    <p class="center"><a href="#Aboutus" class="slide button_small font_darkGreen">to top</a></p>
+</div>
+</footer>
+<script type="module" src="./js/main.js" defer></script>
+
+</body>
+</html>

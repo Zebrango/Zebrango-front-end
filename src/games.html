@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="de">
+    <head>
+
+        <title>ZebrangoPriceGuess</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <script type="text/javascript" src="../contracts/ZebrangoPriceGuess.js"></script>
+        <script type="text/javascript" src="../contracts/AggregatorV3Interface.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script src="https://unpkg.com/moralis@0.0.184/dist/moralis.js"></script>
+        <link href="css/default.css" rel="stylesheet">
+
+    </head>
+    <body>
+        <nav id="topnav" class="clearfix">
+            <img src="images/Zebrango_logo_03_KopfRundHG_green_200px.svg" alt="Logo">
+            
+            <ul class="mainnav_games">
+                <li><p>Hi, <span id="address-span">XXXXXXXXXXXXXXXXX</span></p></li>
+                <li><p> <span id="funds">XXX</span></p></li>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        
+            <ul class="buttonnav">
+                <li><button type="button" id="login_button" class="button_small font_darkGreen">Authenticate</a></li>
+                <li><button type="button" id="logout_button" class="button_small font_darkGreen">logout</a></li>
+            </ul>
+
+        </nav>
+
+
+    <header id="Top">
+    </header>
+    <main>
+        <div class="bgcover bg_header font_weiss min100vh pad8">
+            <h2 class="pad3">Avax Price Prediction</h2>
+            <p class="center margup"><a href="#Questions">click here to learn how it works</a></p>
+            <div class="roundBox ">
+                <div class="infosPredict">
+                    <div>AVAX: <span id="current-price">$0.0</span></div>
+                    <div >Round : <span id="Time">0:00</span>s</div>
+                </div>
+
+<!--expired round-->
+                <div class="rounds">
+                    <div class="expiredRound flexboxRound">
+
+                        <div class="roundHeader">
+                            <div>expired Round</div>
+                            <div id="closedRound-id">#0000</div>
+                        </div>
+                            <div class="roundMain">
+                                <div class="roundMainMiddleExpired">
+                                    <div class="rounMMppExpired">
+                                        <p>closed price</p>
+                                        <p id="closedPrice-closedRound">$$$$$$$$</p>
+                                    </div>
+
+                                    <div class="rounMMlpExpired">
+                                            <div>locked price</div>
+                                            <div id="lockedPrice-closedRound">$$$$$$$$</div>
+                                    </div>
+                                    <div class="rounMMppExpired">
+                                            <div>prize pool</div>
+                                            <div id="prizePool-closedRound">$$$$$$$$</div>
+                                    </div>
+
+
+                                </div>
+                                <div class="roundMainUD">
+                                    <div class="divUp"><p class="font_s1_3">up</p><p id="upPayout-closedRound">0.0x Payout</p></div>
+                                    <div class="divDown"><p class="font_s1_3">down</p><p id="downPayout-closedRound">0.0x Payout</p></div>
+                                </div>
+
+                            </div>
+
+                    </div>
+<!--current round-->
+
+                    <div class="currentRound flexboxRound">
+                        <div class="roundHeader">
+                            <div>current Round</div>
+                            <div id="currentRound-id" >#0000</div>
+                        </div>
+                            <div class="roundMain">
+                                <div class="roundMainMiddle">
+                                    <div class="rounMMlp">
+                                        <p>last price</p>
+                                        <p id="last-price">$$$$$$$$</p>
+                                    </div>
+
+                                    <div class="rounMMlp">
+                                            <div>locked price</div>
+                                            <div id="lockedPrice-currentRound">$$$$$$$$</div>
+                                    </div>
+                                    <div class="rounMMpp">
+                                            <div>prize pool</div>
+                                            <div id="prizePool-currentRound">$$$$$$$$</div>
+                                    </div>
+
+
+                                </div>
+                                <div class="roundMainUD">
+                                    <div class="divUp"><p class="font_s1_3">up</p><p id="upPayout-currentRound">0.0x Payout</p></div>
+                                    <div class="divDown"><p class="font_s1_3">down</p><p id="downPayout-currentRound">0.0x Payout</p></div>
+                                </div>
+
+                            </div>
+                    </div>
+
+<!--next round-->
+                    <div class="nextRound flexboxRound">
+                        <div class="roundHeader">
+                            <div>next Round</div>
+                            <div id="nextRound-id">#0000</div>
+                        </div>
+                            <div class="roundMain">
+                                <div class="roundMainMiddle">
+                                
+
+                                    <div>
+                                        <div>
+                                            <input class="inputNumber" type="number" name="amount" id="amount" placeholder="0.0">
+                                        </div>
+                                    
+
+                                    </div>
+
+                                    <div class="roundMainMiddleButtons">
+                                        <div class="buttonUp" id="bet-up">bet up</div>
+                                        <div class="buttonDown" id="bet-down">bet down</div>
+                                    </div>
+                                    <div class="rounMMpp">
+                                        <div>prize pool</div>
+                                        <div id="prizePool-nextRound">$$$$$$$$</div>
+                                </div>
+
+
+                                </div>
+                                <div class="roundMainUD">
+                                    <div class="divUp"><p class="font_s1_3">up</p><p id="upPayout-nextRound">0.0x Payout</p></div>
+                                    <div class="divDown"><p class="font_s1_3">down</p><p id="downPayout-nextRound">0.0x Payout</p></div>
+                                </div>
+
+                            </div>
+                    </div>
+                
+            </div>
+        </div>
+
+    <!--played rounds-->
+        <div class="roundsPlayed">
+            <div class="PlayedRound flexboxRoundPlayed">
+                <div class="roundHeaderPlayed">
+                    <div>Played Rounds</div>
+                </div>
+                    <div class="roundPlayed">
+                    
+                        <div class="roundMainPlayed">
+                            <div class="rounMPplayed">
+
+                                <div id="userRoundsID">eventID</div>
+                                <div id="userRoundsStand">Stand</div>
+                                <div id="userRoundsAmount">amount</div>
+                                <div id="claimBtn">claim</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="pad2"></div>
+<!--past rounds search-->
+            
+<article id="PastRounds" class="center pad3">
+    <div class="font_hell wrap800"> 
+        
+
+        <h2 class="font_white center" >past rounds</h2>
+
+            
+            <div id="divtablePastRound" class="wrap900">
+                
+                <div id="divtablePastRoundInput">
+                  <input class="pastRoundInput" id="pastRoundInput" onchange="pastRoundInputChange(this)" type="text" name="pastRound" placeholder="insert the round ID">
+                  <input class="pastRoundInput" id="pastRoundBtn" type="submit" value="S E A R C H ">
+                 </div>
+                <table id="tablePastRound">
+                    <thead>
+                        <tr>
+                            <td>round  <span id="pastRoundID">  XXX</span> </td>
+                        </tr>
+               
+                    </thead>
+
+                    <tbody id="pastRoundID">
+                        <tr>
+                            <th>closed time</th>
+                            <th>locked price</th>
+                            <th>closed price</th>
+                            <th>total pool</th>
+
+
+                        </tr>
+                 
+                        <tr>
+                            <td id="pastRoundclosedtime">XXX</td>
+                            <td id="pastRoundLockedprice">XXX</td>
+                            <td id="pastRoundClosedprice">XXX</td>
+                            <td id="pastRoundPayOut">XXX</td>
+
+
+                        </tr>
+                     
+                      
+                        <div class="pad8"></div>
+                        
+                    </tbody>
+                </table>
+                <div class="pad8"></div>
+            </div>
+        
+    </div>
+    <div class="pad8"></div>
+   
+</article>
+
+
+            <div class="pad8"></div>
+<!--how it works-->  
+                    <section class="main-section" id="PriceGuess">
+                        
+                        <article>
+                       
+   
+                        <div id="Questions">
+                        <header><h2>how it works</h2></header>
+                        
+                            <p><strong class="font_softorange"> Zebrango Price Prediction is a fun and simple decentralized Game.<br>
+                                Predict if the price of AVAX/USD will be higher or lower after each round.</strong><br><br>
+                                example:</p>
+                            <p>
+                                - if you bet that the price of AVAX/USD will go up and the closed price is higher than the locked price after the live round finishes, you WIN! <br>
+                                - if you bet that the price of AVAX/USD will go down and the closed price is lower than the locked price after the live round finishes, you WIN! <br>
+                            </p><br>
+
+                            <p><strong class="padbot font_softorange">
+                                How is the payout calculated?</strong><br>
+                                Payout ratio for UP pool = total value of both pools ÷ value of UP pool.<br>
+                                Payout ratio for DOWN pool = total value of both pools ÷ value of DOWN pool.
+                            </p><br>
+
+
+                            <p><strong class="lineheight2rem font_softorange">
+                                What are the fees?</strong><br>
+                                4% of each round total prize, which will be used completley to fund Zebrango events.
+                            </p><br>
+
+                            <p><strong class="lineheight2rem font_softorange">
+                                What are you using for the price feed?</strong><br>
+                                Our smart contract uses Chainlink oracle to get the latest price feed.
+                            </p><br>
+
+                            <p><strong class="lineheight2rem font_softorange">
+                                Why the game is paused?</strong><br>
+                                This means the game smart contract is unable to obtain the price from chainlink oracle at the time, the round has ended.
+                            </p><br>
+
+                            <p><strong class="lineheight2rem font_softorange">
+                                When will the game resume after being paused?</strong><br>
+                                The game will resume when the operator manually resumes the game.
+                                </p><br>
+
+                            <p><strong class="lineheight2rem font_softorange">
+                                    What will happen to my funds if the game paused?</strong><br>
+                                    If the game pauses while you have a live position, your funds will be available to reclaim.
+                            </p><br>
+
+                            <p><strong class="lineheight2rem font_softorange">
+                                What will happen if the price didn't move?</strong><br>
+                                This is a very rare thing to happen, but if it did happen, all funds will be send to the Zebrango events.
+                            </p><br>
+
+                            <p><strong class="lineheight2rem">
+                                Have fun!</strong>
+                            </p>
+
+                        </div>
+
+                        </article>
+                    </section>
+            </div>
+        
+
+        </div>
+
+
+    
+
+
+    </main>
+<footer id="end" class="center pad3">
+    
+
+        <div class="center pad3"> 
+    <h3 class="font_darkGreen">Find us here</h3>
+    <p class="font_darkGreen"> You have questions?<br>
+        Wanna connect? <br>
+        Become part of the awesome Zebrango community?<br><br>
+        <b>Come join us on Discord</b>
+    </p>
+    <div><img class="max50px" src="images/Discord-Logo-Black.svg" alt="" /></div>
+</div>
+
+<div class="center pad8">
+    <div><img class="max50px" src="images/mango_03_400px.svg" alt="" /></div>
+    <p class="center"><a href="#Top" class="slide button_small font_darkGreen">to top</a></p>
+</div>
+</footer>
+<script type="module" src="./js/mainPriceGuess.js" defer></script>
+
+</body>
+</html>
+
+
+
+       
