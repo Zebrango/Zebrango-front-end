@@ -54,7 +54,7 @@ async function renderApp() {
     document.getElementById("logout_button").style.display = "block";
 
     window.web3 = await Moralis.enableWeb3();
-    let instance = new web3.eth.Contract(window.ZGabi.abi, "0x6C96a69594f24C7FAd66b66ded57a21D6EFC9c52");
+    let instance = new web3.eth.Contract(window.ZGabi.abi, "0xc9CE91aE411D6B6b3175272dec3933A4A0F70D94");
     state.aggro = new web3.eth.Contract(window.Aggroabi.abi, "0x5498BB86BC934c8D34FDA08E81D444153d0D06aD")
     
    
@@ -108,9 +108,9 @@ async function updateStates(){
 
 async function getPricefromOracle(){
   res  = await state.aggro.methods.latestRoundData().call();
-  price = res['answer']/100000000
-  document.getElementById("current-price").innerHTML = "$" + price.toFixed(2)
-  document.getElementById("last-price").innerHTML = "$" + price.toFixed(2)
+  price = Number(res['answer']) /100000000
+  document.getElementById("current-price").innerHTML = "$" + Number(price).toFixed(2)
+  document.getElementById("last-price").innerHTML = "$" + Number(price).toFixed(2)
 
 }
 
@@ -147,14 +147,14 @@ async function login() {
     try {
 
       user = await Moralis.authenticate();
-      
+
       if(user){
           state.current_user = user
           renderApp();
       }
     } catch (error) {
       console.log(error);
-      displayErrorMessage(error);
+      
     }
 }
 
@@ -325,7 +325,7 @@ async function claimable(roundID){
 }
 
 
-async function claim(elem){
+window.claim = async function claim(elem){
   roundID = elem.getAttribute('value')
   if(!claimable(roundID)){
     return
@@ -352,7 +352,7 @@ async function getPastRound(){
   document.getElementById("pastRoundclosedtime").innerHTML = closeTimestamp.toLocaleString()
   document.getElementById("pastRoundLockedprice").innerHTML = round.lockprice
   document.getElementById("pastRoundClosedprice").innerHTML = round.closeprice
-  document.getElementById("pastRoundPayOut").innerHTML = round.totalAmount
+  document.getElementById("pastRoundPayOut").innerHTML = Number(state.web3.utils.fromWei(round.totalAmount),'ether').toFixed(4) + ' Avax'
 
 }
 
