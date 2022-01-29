@@ -1,7 +1,12 @@
 
 import { serverUrl, appId } from "../../.env.json"
+
 Moralis.start({ serverUrl, appId });
 
+window.ethereum.on('accountsChanged', function (accounts) {
+  state.current_user = accounts[0]
+  console.log(state.current_user)
+})
 const form  = document.getElementById('project-form');
 
 const overlay = document.getElementById('overlay')
@@ -9,7 +14,7 @@ document.getElementById("login_button").onclick = login;
 document.getElementById("logout_button").onclick = logout;
 document.getElementById("Events").onclick = openModal;
 document.getElementById("close-button").onclick = closeModal;
-const pastEventTable = document.getElementById("pastEventID")
+
 const pastEventBtn = document.getElementById("pastEventBtn")
 pastEventBtn.onclick = getEvent;
 
@@ -25,7 +30,8 @@ async function renderApp() {
   document.getElementById("logout_button").style.display = "block";
   window.web3 = await Moralis.enableWeb3();
   let instance = new web3.eth.Contract(window.abi.abi, "0x48CA598C8534700779C122cd45f79A2B926f6e4F");
-  
+  let accounts = await web3.eth.getAccounts()
+  state.current_user = accounts[0]
   if(!state.instance){
     state.instance = instance
   }
@@ -110,7 +116,7 @@ async function add_project(form){
     project.set('username', username)
     project.set('githublink', githublink)
     project.set('description', description)
-    project.set('maker', state.current_user.get('ethAddress'))
+    project.set('maker', state.current_user)
 
 
     await project.save()
@@ -180,7 +186,7 @@ async function display_proposals(){
     proposals.forEach(async (element) =>{
 
       const query = new Moralis.Query("Project")
-      query.equalTo("maker", element._maker.toLowerCase())
+      query.equalTo("maker", element._maker)
       query.equalTo("EventID", currentEvent.toString())
       const res = await query.first()
 
@@ -196,7 +202,11 @@ async function display_proposals(){
       voteBtn.setAttribute('id', element._proposalID)
 
       voteBtn.innerHTML = "Vote";
-      tdUserName.innerHTML = res.get('username') ? res : '-'
+      try{
+        tdUserName.innerHTML = res.get('username') ? res : '-'
+      }catch(error){
+        console.log(error)
+      }
       tdMaker.innerHTML = element._maker;
       tdVotes.innerHTML = element._voteCount;
 
