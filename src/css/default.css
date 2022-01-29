@@ -263,7 +263,7 @@ header h2 {
     text-transform: uppercase;
 }
 header h2:after {
-    background: #fff;
+    background: pink;
     margin: 0.5rem 0 0;
 }
 header img {
