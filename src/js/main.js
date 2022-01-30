@@ -203,7 +203,7 @@ async function display_proposals(){
 
       voteBtn.innerHTML = "Vote";
       try{
-        tdUserName.innerHTML = res.get('username') ? res : '-'
+        tdUserName.innerHTML = res.get('projectname') ? res : '-'
       }catch(error){
         console.log(error)
       }
