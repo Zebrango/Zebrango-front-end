@@ -221,7 +221,7 @@ async function display_proposals(){
 }
 
 
-async function handleVote(elem){
+window.handleVote = async function handleVote(elem){
   id = elem.getAttribute('id')
   let fee = 0.1;
   let currentEvent = await state.instance.methods.currentEvent().call();
@@ -233,13 +233,9 @@ async function handleVote(elem){
 
 }
 
-async function handleVoteinput(elem){
-    elem.setAttribute('value',elem.value)
-}
-
 
 //displaying past events
-async function getEvent(elem){
+async function getEvent(){
   let instance = state.instance;
   let eventID =pastEventBtn.getAttribute('val')
 
