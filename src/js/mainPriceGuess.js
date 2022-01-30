@@ -107,11 +107,17 @@ async function updateStates(){
 }
 
 async function getPricefromOracle(){
+  try{
   res  = await state.aggro.methods.latestRoundData().call();
-  price = Number(res['answer']) /100000000
+  let answer = Number(res['answer'])
+  price =  answer/100000000
   document.getElementById("current-price").innerHTML = "$" + Number(price).toFixed(2)
   document.getElementById("last-price").innerHTML = "$" + Number(price).toFixed(2)
 
+}catch(error){
+  console.log(error)
+}
+ 
 }
 
 async function betUp(){
@@ -283,7 +289,7 @@ async function getUserRounds(account){
   }
 
 
-  for(i=0;i<len;i++){
+  for(let i=0;i<len;i++){
     roundID = res['0'][i]
     betInfo = res['1'][i]
     let idDiv = document.createElement('div')
