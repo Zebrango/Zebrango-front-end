@@ -77,7 +77,7 @@ async function init() {
   
 async function login() {
   try {
-    user = await Moralis.authenticate();
+    let user = await Moralis.authenticate();
     
     if(user){
         state.current_user = user
@@ -125,7 +125,7 @@ async function add_project(form){
 
 
 async function openModal() {
-  modal = document.getElementById("modal")
+  let modal = document.getElementById("modal")
  
   if (modal == null) return
   modal.classList.add('active')
@@ -150,7 +150,7 @@ async function display_proposals(){
     let proposals = []
 
 
-    for (i = 0;i<=propID;i++){
+    for (let i = 0;i<=propID;i++){
       let proposal = await instance.methods.getProposals(currentEvent, i).call()
       proposals.push(proposal)
     }
@@ -222,7 +222,7 @@ async function display_proposals(){
 
 
 window.handleVote = async function handleVote(elem){
-  id = elem.getAttribute('id')
+  let id = elem.getAttribute('id')
   let fee = 0.1;
   let currentEvent = await state.instance.methods.currentEvent().call();
   state.instance.methods.voteOnProposal(currentEvent, id).send({value:state.web3.utils.toWei(fee.toString(),'ether'), from:ethereum.selectedAddress})
@@ -319,7 +319,7 @@ async function addToTable(winningProps, endDate, prize, eventID){
   tableBody.appendChild(tr)
 
 
-  for(i = 0;i<winningProps.length;i++){
+  for(let i = 0;i<winningProps.length;i++){
     let tr = document.createElement('tr')
     let closedDate = document.createElement('td')
     let Eventmaker = document.createElement('td')
@@ -344,7 +344,7 @@ async function getWinningProposals(eventID){
   
   let winningProps = await instance.methods.getWinningProposals(eventID).call();
   let  proposals = []
-  for(i = 0;i<winningProps.length;i++){
+  for(let i = 0;i<winningProps.length;i++){
     let prop = await instance.methods.getProposals(eventID, winningProps[i]).call();
     proposals.push(prop);
   }

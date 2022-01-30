@@ -108,9 +108,9 @@ async function updateStates(){
 
 async function getPricefromOracle(){
   try{
-  res  = await state.aggro.methods.latestRoundData().call();
+  let res  = await state.aggro.methods.latestRoundData().call();
   let answer = Number(res['answer'])
-  price =  answer/100000000
+  let price =  answer/100000000
   document.getElementById("current-price").innerHTML = "$" + Number(price).toFixed(2)
   document.getElementById("last-price").innerHTML = "$" + Number(price).toFixed(2)
 
@@ -152,7 +152,7 @@ async function betDown(){
 async function login() {
     try {
 
-      user = await Moralis.authenticate();
+      let user = await Moralis.authenticate();
 
       if(user){
           state.current_user = user
@@ -274,7 +274,6 @@ async function getUserRounds(account){
 
   
 
-  console.log(len)
   while(roundIdDiv.lastElementChild){
     roundIdDiv.removeChild(roundIdDiv.lastElementChild)
   }
@@ -290,8 +289,8 @@ async function getUserRounds(account){
 
 
   for(let i=0;i<len;i++){
-    roundID = res['0'][i]
-    betInfo = res['1'][i]
+    let roundID = res['0'][i]
+    let betInfo = res['1'][i]
     let idDiv = document.createElement('div')
     let amountDiv = document.createElement('div')
     let standDiv = document.createElement('div')
@@ -322,7 +321,6 @@ async function claimable(roundID){
   //if (!_claimable){
   //    return false;
   //}
-  console.log(state.current_user)
   let check = await state.instance.methods.claimable(roundID , state.current_user).call()
   if(!check){
     return false;
@@ -332,7 +330,7 @@ async function claimable(roundID){
 
 
 window.claim = async function claim(elem){
-  roundID = elem.getAttribute('value')
+  let roundID = elem.getAttribute('value')
   if(!claimable(roundID)){
     return
   }
@@ -349,7 +347,7 @@ window.pastRoundInputChange =  async function pastRoundInputChange(item){
 }
 
 async function getPastRound(){
-  val = pastRoundBtn.getAttribute('val')
+  let val = pastRoundBtn.getAttribute('val')
   let round = await state.instance.methods.rounds(val).call()
   
   var closeTimestamp = new Date(round.closeTimestamp * 1000);
