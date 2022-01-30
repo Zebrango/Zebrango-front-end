@@ -41,3 +41,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+# Links
+[Project Overview](https://www.zebrango.com/pdf/Zebrango_project_overview.pdf)  
+[Whitepaper](https://www.zebrango.com/pdf/whitepaper_Zebrango.pdf)  
+[Zebrango](https://www.zebrango.com/)
