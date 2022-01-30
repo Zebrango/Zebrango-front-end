@@ -29,7 +29,7 @@ async function renderApp() {
   document.getElementById("logout_button").style.display = "inline-block";
   document.getElementById("logout_button").style.display = "block";
   window.web3 = await Moralis.enableWeb3();
-  let instance = new web3.eth.Contract(window.abi.abi, "0x48CA598C8534700779C122cd45f79A2B926f6e4F");
+  let instance = new web3.eth.Contract(window.abi.abi, "0x4257D70Da346Db204AEA3B6Be22D9c5967c5D333");
   let accounts = await web3.eth.getAccounts()
   state.current_user = accounts[0]
   if(!state.instance){

@@ -54,7 +54,7 @@ async function renderApp() {
     document.getElementById("logout_button").style.display = "block";
 
     window.web3 = await Moralis.enableWeb3();
-    let instance = new web3.eth.Contract(window.ZGabi.abi, "0xc9CE91aE411D6B6b3175272dec3933A4A0F70D94");
+    let instance = new web3.eth.Contract(window.ZGabi.abi, "0x1C234a147786b14d67a9B3F7a7801dAe752a0Fc2");
     state.aggro = new web3.eth.Contract(window.Aggroabi.abi, "0x5498BB86BC934c8D34FDA08E81D444153d0D06aD")
     
    
